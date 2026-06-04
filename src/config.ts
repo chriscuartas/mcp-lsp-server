@@ -26,7 +26,8 @@ const DEFAULT_SERVERS = [
   },
   {
     extensions: ['py'],
-    command: ['pylsp'],
+    // python -m pylsp works even when the Scripts dir isn't on PATH (common on Windows)
+    command: ['python', '-m', 'pylsp'],
   },
 ];
 

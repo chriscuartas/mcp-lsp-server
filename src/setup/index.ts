@@ -125,13 +125,14 @@ async function main() {
   writeFileSync(configPath, JSON.stringify(configContent, null, 2));
   console.log(`\nConfig written to: ${configPath}`);
 
-  console.log('\nAdd this to ~/.claude/settings.json under "mcpServers":\n');
+  const distIndexPath = join(cwd, 'dist', 'index.js');
+  console.log('\nOr add this to ~/.claude/settings.json under "mcpServers":\n');
   console.log(
     JSON.stringify(
       {
         'mcp-lsp': {
           command: 'node',
-          args: [join(process.env['MCP_LSP_DIST'] ?? '', 'index.js')],
+          args: [distIndexPath],
         },
       },
       null,

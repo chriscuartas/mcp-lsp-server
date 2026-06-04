@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "description": "MCP server providing LSP intelligence for Claude Code",
-  "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",

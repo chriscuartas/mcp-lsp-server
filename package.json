@@ -1,0 +1,24 @@
+{
+  "name": "mcp-lsp-server",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "MCP server providing LSP intelligence for Claude Code",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "setup": "tsx src/setup/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "vscode-languageserver-protocol": "3.18.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "tsx": "4.22.4",
+    "@types/node": "24.0.0"
+  }
+}

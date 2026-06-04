@@ -75,6 +75,8 @@ export class ServerManager {
     const child = spawn(command, args, {
       stdio: ['pipe', 'pipe', 'pipe'],
       cwd: serverConfig.rootDir ?? process.cwd(),
+      // .cmd wrappers (npm global installs on Windows) require shell to execute
+      shell: process.platform === 'win32',
     });
 
     const adapter = adapterRegistry.getAdapter(serverConfig);
@@ -198,8 +200,10 @@ export class ServerManager {
         setTimeout(() => reject(new Error('initialization timeout')), 5000)
       ),
     ]).catch(() => {
-      // Mark initialized anyway — some servers never send the notification
+      // Server didn't send initialized notification — mark ready and resolve the
+      // promise so any ensureAndWait callers in operations.ts can proceed
       serverState.initialized = true;
+      if (resolveInit) { resolveInit(); resolveInit = undefined; }
     });
 
     return serverState;

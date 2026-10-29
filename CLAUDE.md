@@ -20,11 +20,20 @@ Local MCP server that fronts real language servers (LSP) and exposes definitions
 
 ```bash
 npm run build          # tsc → dist/
-npm run typecheck      # tsc --noEmit — must pass before commit
 npm run setup          # install/verify the backing language servers
 ```
 
 `dist/` is gitignored and is what the server actually runs (`node dist/index.js`). Claude Code launches this server from `~/.claude.json` at startup — **after any `src/` change, run `npm run build` and restart Claude Code**, or the running server keeps serving the old build.
+
+---
+
+## Verification commands
+
+```bash
+npm run typecheck      # tsc --noEmit; must pass before commit
+```
+
+No test suite and no `lint` script exist in this repo: say so explicitly rather than letting a missing script read as a skipped check. Behavioural verification is manual: rebuild, restart Claude Code, then exercise a tool against a real file in a language the change touches.
 
 ---
 
